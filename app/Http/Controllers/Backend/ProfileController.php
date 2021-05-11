@@ -13,13 +13,13 @@ class ProfileController extends Controller
     public function ProfileView(){
         $id = Auth::user()->id;
         $user = User::find($id);
-        return view('backend.profile.view_profile', compact('user'));
+        return view('backend.user.view_profile', compact('user'));
     }
 
     public function ProfileEdit(){
         $id = Auth::user()->id;
         $editData = User::find($id);
-        return view('backend.profile.edit_profile', compact('editData'));
+        return view('backend.user.edit_profile', compact('editData'));
     }
 
     public function ProfileStore(Request $request){
@@ -45,7 +45,7 @@ class ProfileController extends Controller
     }
 
     public function PasswordView(){
-        return view('backend.profile.edit_password');
+        return view('backend.user.edit_password');
     }
 
     public function PasswordUpdate(Request $request){
@@ -65,7 +65,7 @@ class ProfileController extends Controller
                 'message' => 'Password Alterada com Sucesso',
                 'alert-type' => 'success'
             );
-            return redirect()->route('login')->with($notification);
+            return redirect()->route('login')->with('mensagem_sucesso', 'Password Actualizada com Sucesso! Por Favor Reintroduza as Suas Credênciais.');
         }else{
             $notification = array(
                 'message' => 'A Password Atual está errada!',
